@@ -44,14 +44,14 @@ ENV HOME=/config/home \
     XDG_CACHE_HOME=/config/cache \
     XDG_DATA_HOME=/config/data \
     XDG_STATE_HOME=/config/state \
-    MAGPIE_ADDR=0.0.0.0:3425
+    MAGPIE_ADDR=127.0.0.1:3425
 
 VOLUME /config
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
     CMD ["/magpie", "healthcheck"]
 
-EXPOSE 3425 3430
+EXPOSE 3425 3430 10000
 
 ENTRYPOINT ["/magpie"]
-CMD ["serve"]
+CMD ["serve", "--web=0.0.0.0:10000"]
